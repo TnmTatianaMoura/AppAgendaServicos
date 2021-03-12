@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "564230319667",
+    "project_id": "servicos-agenda-75eaa",
+    "storage_bucket": "servicos-agenda-75eaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564230319667:android:606c05e6c32129a68b3d46",
+        "android_client_info": {
+          "package_name": "com.example.servicosagenda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564230319667-0uolvhg46gbfjgop8j940u2bgb0bclr3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.servicosagenda",
+            "certificate_hash": "4c4f765776e3103e448b01ea30bf7caff19384ce"
+          }
+        },
+        {
+          "client_id": "564230319667-5qm5kq34dn3s7al6r7gfmqhvga3n0ap7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVx2lYs8tWwzYlSh72JLuue94I2JtjPbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564230319667-5qm5kq34dn3s7al6r7gfmqhvga3n0ap7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,136 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fragment.FragmentHome">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <!-- TODO: Update blank fragment layout -->
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:layout_gravity="center"
+     android:gravity="center"
+     android:padding="10dp"
+     android:orientation="vertical">
+
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+
+         <ImageView
+             android:id="@+id/imagemView_Home"
+             android:layout_width="match_parent"
+             android:layout_height="200dp"
+             android:layout_centerHorizontal="true"
+             android:layout_centerVertical="true"
+             android:src="@drawable/iconeagendamentocliente"/>
+         <ProgressBar
+             android:id="@+id/progressbar_Home"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true"
+             android:layout_centerVertical="true"
+             />
+
+
+
+
+     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView_Home_Informacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Olá seja bem vindo a minha empresa !"
+        android:textSize="20sp"/>
+
+     <TextView
+         android:id="@+id/textView_Home_ValorServico"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:padding="10dp"
+         android:text="Valor do corte: R$ 30,00"
+         android:textSize="20sp"/>
+
+     <TextView
+         android:id="@+id/textView_Home_Contatoendereco"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:padding="10dp"
+         android:text="Contato  e Endereço"
+         android:textSize="20sp"/>
+
+        <!-- 1° CardView-->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_Home_ContatoTelefone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="3dp"
+            app:cardUseCompatPadding="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView_Home_NumeroContato"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="(61) 9 9390-0772"
+                    android:textSize="15sp"/>
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/home_whatsapp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+     <!-- 2° CardView-->
+     <androidx.cardview.widget.CardView
+         android:id="@+id/cardView_Home_MapaLocalizacao"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         app:cardCornerRadius="2dp"
+         app:cardElevation="3dp"
+         app:cardUseCompatPadding="true"
+         android:foreground="?android:attr/selectableItemBackground">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+             android:gravity="center"
+             android:orientation="horizontal">
+
+             <TextView
+                 android:id="@+id/textView_Home_Endereco"
+                 android:layout_width="130dp"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:text="Endereço"
+                 android:textSize="15sp"/>
+             <ImageView
+                 android:layout_width="35dp"
+                 android:layout_height="35dp"
+                 android:layout_gravity="center"
+                 android:src="@drawable/home_localizacao"/>
+         </LinearLayout>
+     </androidx.cardview.widget.CardView>
+
+ </LinearLayout>
+    </ScrollView>
+</FrameLayout>
