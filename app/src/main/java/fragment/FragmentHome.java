@@ -35,9 +35,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import UTIL.Util;
+
 /**
  *
  */
+
 public class FragmentHome extends Fragment implements View.OnClickListener {
 
     // TODO: Definindo os parametros
@@ -55,6 +58,9 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private ValueEventListener valueEventListener;
+
+    private String latitude_Empresa;
+    private String longitude_Empresa;
 
 
     //Metodo construtor
@@ -96,30 +102,62 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
        //----------------------------------- AÇAO DE CLICK CARDVIEW-----------------------------
     @Override
     public void onClick(View view) {
-
         switch (view.getId()){
             case R.id.cardView_Home_ContatoTelefone:
 
-                String numero = textViewNumeroContato.getText().toString();
-                if (!numero.isEmpty()){
-                    dialogContato(numero);
+                click_ContatoTelefonico();
 
-
-                }else{
-                    Toast.makeText(getContext(),"Numero de contato Indisponível!", Toast.LENGTH_LONG).show();
-                }
                 break;
 
             case R.id.cardView_Home_MapaLocalizacao:
-                Toast.makeText(getContext(),"CardView Numero de Mapa de Localização", Toast.LENGTH_LONG).show();
-                break;
 
+                click_MapaLocalizacao();
+
+                break;
              }
     }
 
+    private void click_ContatoTelefonico(){
+
+        String numero = textViewNumeroContato.getText().toString();
+        if (!numero.isEmpty()){
+            dialogContato(numero);
+
+        }else{
+            Toast.makeText(getContext(),"Numero de contato Indisponível!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void click_MapaLocalizacao(){
+        if (!latitude_Empresa.isEmpty() && !longitude_Empresa.isEmpty()){
+            if (Util.statusInternet_MoWi(getContext())){
+                abrirLocalizacaoEmpresa();
+            }else{
+                Toast.makeText(getContext(),"Erro de conexao com a Internet", Toast.LENGTH_LONG).show();
+            }
+
+        }else{
+            Toast.makeText(getContext(),"Localização indisponível", Toast.LENGTH_LONG).show();
+        }
+    }
+    //----------------------------------- AÇAO DE CLICK ABRIR ENDERECO ----------------------------------------
+        private void abrirLocalizacaoEmpresa(){
+
+        String url = "https://www.google.com/maps/search/?api=1&query="+latitude_Empresa+longitude_Empresa;
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent);
+
+    }
+    //----------------------------------- AÇAO DE DIALOG CONTATO WHATSAPP E LIGAÇÃO ----------------------------
+
+
     private void dialogContato(String numero){
 
-        String contato = numero.replace(" ","").replace("-","").replace("(","")
+        String contato = numero
+                .replace(" ","")
+                .replace("-","")
+                .replace("(","")
                 .replace(")","");
 
        StringBuffer numeroContato = new StringBuffer(contato);
@@ -145,15 +183,21 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
 
     private void entrarEmContatoWhatsApp(StringBuffer numeroContato){
 
-        numeroContato.deleteCharAt(0);
-        numeroContato.deleteCharAt(2);
 
-        Intent intent = new Intent("android.intent.action.MAIN");
-        intent.setComponent(new ComponentName("com.whatsapp","com.whatsapp.Conversation"));
+        try {
+            numeroContato.deleteCharAt(0);
+            numeroContato.deleteCharAt(2);
 
-        intent.putExtra("jid",
-                PhoneNumberUtils.stripSeparators("55" + numeroContato)+ "@s.whatsapp.net");
-                startActivity(intent);
+            Intent intent = new Intent("android.intent.action.MAIN");
+            intent.setComponent(new ComponentName("com.whatsapp","com.whatsapp.Conversation"));
+
+            intent.putExtra("jid",
+                    PhoneNumberUtils.stripSeparators("55" + numeroContato)+ "@s.whatsapp.net");
+            startActivity(intent);
+        }catch (Exception e){
+            Toast.makeText(getContext(),"Erro - Verifique se o WhatsApp esta instalado no seu Celular",Toast.LENGTH_LONG).show();
+        }
+
     }
 
    private void entarEmContatoLigacao(StringBuffer numeroContato){
@@ -181,7 +225,7 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
                             if(!informacao.isEmpty() && !valorServico.isEmpty()){
                                 atualizarDados(imagemUrl,informacao,latitude,longitude,valorServico,numeroContato);
                             }
-                    }
+                      }
                 }
 
                 @Override
@@ -198,6 +242,10 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         textView_Informacao.setText(informacao);
         textView_ValorServico.setText(valorServico);
         textViewNumeroContato.setText(numeroContato);
+
+        //Dados do Google Maps
+        latitude_Empresa = latitude;
+        longitude_Empresa = longitude;
 
 
         Glide.with(getContext()).asBitmap().load(imagemUrl).listener(new RequestListener<Bitmap>() {
@@ -225,5 +273,15 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
         super.onStart();
 
        ouvinte();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (valueEventListener != null){
+            reference.removeEventListener(valueEventListener);
+            valueEventListener = null;
+        }
     }
 }

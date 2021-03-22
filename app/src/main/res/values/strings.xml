@@ -2,4 +2,6 @@
     <string name="app_name">ServicosAgenda</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="_10_00hs">10:00hs</string>
+    <string name="_10_00_hs">10:00 hs</string>
 </resources>

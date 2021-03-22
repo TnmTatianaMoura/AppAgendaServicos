@@ -56,7 +56,7 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:padding="10dp"
-         android:text="Valor do corte: R$ 30,00"
+
          android:textSize="20sp"/>
 
      <TextView
