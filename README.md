@@ -15,6 +15,6 @@ O projeto Mobile foi desenvolvido com Java Nativo e tem por objetivo criar um ap
 
 #     🚀 Tecnologias
 
-As princiais tecnologias utilizadas no projeto Mobile:
+As principais tecnologias utilizadas no projeto Mobile:
 
 **Java Native**
